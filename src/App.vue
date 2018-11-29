@@ -1,13 +1,27 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
+    <player v-show="songList.length > 0 && !showDetail"></player>
   </div>
 </template>
 
 <script>
+  import Player from './components/playerFooter';
+  import { mapState } from 'vuex'
   export default {
-    name: 'App'
+    name: 'app',
+    components: { Player },
+    data () {
+        return{}
+    },
+    computed: {
+      ...mapState([
+        'songList',
+        'showDetail'
+      ])
+    }
   }
 </script>
 
@@ -18,6 +32,5 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
